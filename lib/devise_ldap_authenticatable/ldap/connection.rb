@@ -12,6 +12,7 @@ module Devise
         ldap_options = params
         ldap_config["ssl"] = :simple_tls if ldap_config["ssl"] === true
         ldap_options[:encryption] = ldap_config["ssl"].to_sym if ldap_config["ssl"]
+        ldap_options[:encryption] = ldap_config["encryption"] if ldap_config["encryption"]
 
         @ldap = Net::LDAP.new(ldap_options)
         @ldap.host = ldap_config["host"]
